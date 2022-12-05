@@ -27,7 +27,7 @@
 <script>
 export default {
   name: 'MyLogin',
-  data () {
+  data() {
     return {
       loginForm: {
         username: 'admin',
@@ -48,20 +48,21 @@ export default {
   },
   methods: {
     // 重置
-    resetLoginForm () {
+    resetLoginForm() {
       this.$refs.loginFormRef.resetFields()
     },
     // 登录
-    login () {
+    login() {
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
-        const { data: res } = await this.$http.post('login', this.loginForm)
+        // const { data: res } = await this.$http.post('login', this.loginForm)
+        const { data: res } = await this.$http.api.reqLoginForm(this.loginForm)
         if (res.meta.status !== 200) return this.$message.error('登录失败')
         this.$message.success('登录成功')
         // 登录成功将token持久化存储到浏览器中
         window.sessionStorage.setItem('token', res.data.token)
         // 跳转到首页
-        this.$router.push('/home')
+        await this.$router.push('/home')
       })
     }
   }

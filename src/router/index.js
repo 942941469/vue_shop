@@ -2,13 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '@/components/Login'
 import Home from '@/components/Home'
-
+import Welcome from '@/components/Home/Welcome'
+import Users from '@/components/users/Users'
 Vue.use(VueRouter)
-
 const routes = [
   {
-    // 重定向
     path: '/',
+    // 重定向
     redirect: '/login'
   },
   {
@@ -19,7 +19,27 @@ const routes = [
   {
     // 首页
     path: '/home',
-    component: Home
+    component: Home,
+    redirect: '/home/welcome',
+    // 路由元信息
+    meta: {
+      title: '首页'
+    },
+    children: [
+      {
+        // 首页欢迎
+        path: 'welcome',
+        component: Welcome
+      },
+      {
+        // 用户
+        path: 'users',
+        component: Users,
+        meta: {
+          title: '用户列表'
+        }
+      }
+    ]
   }
 ]
 

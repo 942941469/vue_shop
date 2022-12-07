@@ -1,3 +1,4 @@
+// 用户相关接口
 import requests from '@/utils/request'
 // 获取用户列表
 export const reqGetUserList = (params) => requests.request({ url: '/users', params, method: 'get' })
@@ -11,3 +12,5 @@ export const reqGetUserInfo = (id) => requests.request({ url: `/users/${id}`, me
 export const reqEditUserInfo = (id, data) => requests.request({ url: `/users/${id}`, data, method: 'put' })
 // 删除用户
 export const reqDeleteUser = (id) => requests.request({ url: `/users/${id}`, method: 'delete' })
+// 分配用户角色
+export const reqSaveUserRoleInfo = (id, data) => requests.request({ url: `/users/${id}/role`, data, method: 'put' })

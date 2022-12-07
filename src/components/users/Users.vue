@@ -34,10 +34,10 @@
         </el-table-column>
         <el-table-column label="操作" width="180px">
           <template v-slot="{row}">
-            <el-button type="primary" size="mini" icon="el-icon-edit" @click="addUserDialog('revise', row.id)"></el-button>
-            <el-button type="danger" size="mini" icon="el-icon-delete" @click="deleteUser(row.id)"></el-button>
+            <el-button type="primary" size="mini" icon="el-icon-edit" @click="addUserDialog('edit', row.id)"></el-button>
+            <el-button type="danger" size="mini" icon="el-icon-delete" @click="deleteUser(row.username, row.id)"></el-button>
             <el-tooltip content="分配角色" placement="top-start" :enterable="false">{{ row }}}
-              <el-button type="warning" size="mini" icon="el-icon-setting"></el-button>
+              <el-button type="warning" size="mini" icon="el-icon-setting" @click="setRolesDialog(row)"></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -52,18 +52,20 @@
         :total="total">
       </el-pagination>
 <!--   添加用户对话框 传递两个自定义含税用于更新页面   -->
-      <AddDialog @getUserList="getUserList" @handleCurrentChange="handleCurrentChange"></AddDialog>
+      <UserDialog @getUserList="getUserList" @handleCurrentChange="handleCurrentChange"></UserDialog>
+<!--   添加角色对话框     -->
+      <SetRolesDialog  @getUserList="getUserList"></SetRolesDialog>
     </el-card>
   </div>
 </template>
 
 <script>
 import Breadcrumb from '@/components/Breadcrumb'
-import AddDialog from '@/components/users/AddDialog'
-
+import UserDialog from '@/components/users/UserDialog'
+import SetRolesDialog from '@/components/users/SetRolesDialog'
 export default {
   name: 'UsersAdminister',
-  components: { Breadcrumb, AddDialog },
+  components: { Breadcrumb, UserDialog, SetRolesDialog },
   data() {
     return {
       // 获取用户列表的参数
@@ -110,11 +112,11 @@ export default {
     },
     // 添加用户
     addUserDialog(data, id) {
-      this.$bus.$emit('addDialog', data, id)
+      this.$bus.$emit('userDialog', data, id)
     },
     // 删除用户
-    async deleteUser(id) {
-      const confirmResult = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+    async deleteUser(name, id) {
+      const confirmResult = await this.$confirm(`此操作将永久删除${name}用户, 是否继续?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -127,6 +129,10 @@ export default {
       this.$message.success('删除用户成功')
       await this.getUserList()
       this.handleCurrentChange(this.userList.length > 0 ? this.queryInfo.pagenum : this.queryInfo.pagenum - 1)
+    },
+    // 分配角色
+    setRolesDialog(row) {
+      this.$bus.$emit('setRolesDialog', row)
     }
   }
 }

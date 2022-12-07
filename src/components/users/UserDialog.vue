@@ -20,15 +20,15 @@
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addOrEditUser">确 定</el-button>
-        </span>
+      <el-button @click="dialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="addOrEditUser">确 定</el-button>
+    </span>
   </el-dialog>
 </template>
 
 <script>
 export default {
-  name: 'AddDialog',
+  name: 'UserDialog',
   data() {
     //  自定义验证规则
     const checkEmail = (rules, values, callback) => {
@@ -101,12 +101,14 @@ export default {
     this.$bus.$on('addDialog', (data, id) => {
       this.dialogVisible = true
       this.mod = data
+      this.userId = id
+      // 如果是修改则获取数据进行展示
       if (data !== 'add') return this.getUserInfo(id)
     })
   },
   // 解绑全局事件总线和自定义事件
   beforeDestroy() {
-    this.$bus.$off('addDialog')
+    this.$bus.$off('userDialog')
     this.$off('getUserList')
   },
   methods: {
@@ -141,7 +143,6 @@ export default {
       this.addForm.username = res.data.username
       this.addForm.email = res.data.email
       this.addForm.mobile = res.data.mobile
-      this.userId = res.data.id
     }
   }
 }

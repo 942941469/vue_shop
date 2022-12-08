@@ -6,6 +6,7 @@ import Welcome from '@/components/Home/Welcome'
 import Users from '@/components/users/Users'
 import Rights from '@/components/power/Rights'
 import Roles from '@/components/power/Roles'
+import Categories from '@/components/goods/Categories'
 Vue.use(VueRouter)
 const routes = [
   {
@@ -55,6 +56,14 @@ const routes = [
         component: Roles,
         meta: {
           title: '角色列表'
+        }
+      },
+      {
+        // 商品分类
+        path: 'categories',
+        component: Categories,
+        meta: {
+          title: '商品分类'
         }
       }
     ]

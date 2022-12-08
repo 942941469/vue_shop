@@ -98,12 +98,12 @@ export default {
   },
   mounted() {
     // 展示对话框
-    this.$bus.$on('addDialog', (data, id) => {
+    this.$bus.$on('userDialog', (mod, id) => {
       this.dialogVisible = true
-      this.mod = data
+      this.mod = mod
       this.userId = id
       // 如果是修改则获取数据进行展示
-      if (data !== 'add') return this.getUserInfo(id)
+      if (mod !== 'add') return this.getUserInfo(id)
     })
   },
   // 解绑全局事件总线和自定义事件

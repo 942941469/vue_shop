@@ -111,8 +111,8 @@ export default {
       this.$message.success('更新用户状态成功')
     },
     // 添加用户
-    addUserDialog(data, id) {
-      this.$bus.$emit('userDialog', data, id)
+    addUserDialog(mod, id) {
+      this.$bus.$emit('userDialog', mod, id)
     },
     // 删除用户
     async deleteUser(name, id) {

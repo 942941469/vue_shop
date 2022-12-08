@@ -4,6 +4,8 @@ import router from './router'
 import './plugins/element.js'
 // 导入全局样式表
 import './assets/css/global.css'
+// 导入第三方插件组件
+import TreeTable from 'vue-table-with-tree-grid'
 // 导入axios
 // import axios from 'axios'
 // 配置请求根路径
@@ -11,7 +13,7 @@ import './assets/css/global.css'
 import API from '@/api/index'
 Vue.prototype.$http = API
 Vue.config.productionTip = false
-
+Vue.component('tree-table', TreeTable)
 new Vue({
   router,
   render: h => h(App),

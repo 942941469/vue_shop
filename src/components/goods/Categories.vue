@@ -48,7 +48,7 @@
 import Breadcrumb from '@/components/Breadcrumb'
 import CateDialog from '@/components/goods/CateDialog'
 export default {
-  name: 'GoodCategories',
+  name: 'GoodsCategories',
   components: { CateDialog, Breadcrumb },
   data() {
     return {

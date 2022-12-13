@@ -1,7 +1,7 @@
 <template>
 <!-- 面包屑 -->
   <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/item.path' }" v-for="item in breadCrumbList" :key="item.path">
+    <el-breadcrumb-item :to="{ path: `${item.path}` }" v-for="item in breadCrumbList" :key="item.path">
       {{item.meta.title}}
     </el-breadcrumb-item>
   </el-breadcrumb>

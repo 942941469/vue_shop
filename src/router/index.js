@@ -8,6 +8,8 @@ import Rights from '@/components/power/Rights'
 import Roles from '@/components/power/Roles'
 import Categories from '@/components/goods/Categories'
 import Params from '@/components/goods/Params'
+import List from '@/components/goods/List'
+import AddGoods from '@/components/goods/AddGoods'
 Vue.use(VueRouter)
 const routes = [
   {
@@ -73,6 +75,22 @@ const routes = [
         component: Categories,
         meta: {
           title: '分类参数'
+        }
+      },
+      {
+        // 商品列表
+        path: 'goods',
+        component: List,
+        meta: {
+          title: '商品列表'
+        }
+      },
+      {
+        // 添加商品
+        path: 'goods/add',
+        component: AddGoods,
+        meta: {
+          title: '添加商品'
         }
       }
     ]

@@ -10,6 +10,7 @@ import Categories from '@/components/goods/Categories'
 import Params from '@/components/goods/Params'
 import List from '@/components/goods/List'
 import AddGoods from '@/components/goods/AddGoods'
+import Order from '@/components/order/Order'
 Vue.use(VueRouter)
 const routes = [
   {
@@ -91,6 +92,14 @@ const routes = [
         component: AddGoods,
         meta: {
           title: '添加商品'
+        }
+      },
+      {
+        // 订单管理
+        path: 'orders',
+        component: Order,
+        meta: {
+          title: '订单管理'
         }
       }
     ]

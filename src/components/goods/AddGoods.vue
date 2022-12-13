@@ -209,14 +209,6 @@ export default {
         // 深拷贝防止表单报错
         const form = _.cloneDeep(this.addFrom)
         form.goods_cat = form.goods_cat.join(',')
-        this.manyTableData.forEach(item => {
-          const newInfo = { attr_id: item.attr_id, attr_vals: item.attr_vals.join(' ') }
-          if (item.attr_vals !== this.addFrom.attrs.attr_vals) this.addFrom.attrs.push(newInfo)
-        })
-        this.onlyTableData.forEach(item => {
-          const newInfo = { attr_id: item.attr_id, attr_vals: item.attr_vals }
-          if (item.attr_vals !== this.addFrom.attrs.attr_vals) this.addFrom.attrs.push(newInfo)
-        })
         form.attrs = this.addFrom.attrs
         if (this.mod === 'edit') {
           const { data: res } = await this.$http.goods.reqEditGoods(this.id, form)
@@ -236,18 +228,6 @@ export default {
       const { data: res } = await this.$http.goods.reqGetGoodsInfo(id)
       if (res.meta.status !== 200) return this.$message.error('获取商品数据失败')
       res.data.goods_cat = res.data.goods_cat.split(',').map(Number)
-      res.data.attrs.forEach((item, index) => {
-        if (item.attr_sel === 'many') {
-          this.manyTableData.push(res.data.attrs[index])
-        } else {
-          this.onlyTableData.push(res.data.attrs[index])
-        }
-      })
-      res.data.pics.forEach((item, index) => {
-        item.pics_big[index].replace('uploads/goodspics/big_', '/tmp_uploads/')
-        const picInfo = { pic: item.pics_big }
-        this.addFrom.pics.push(picInfo)
-      })
       this.addFrom.goods_name = res.data.goods_name
       this.addFrom.goods_price = res.data.goods_price
       this.addFrom.goods_weight = res.data.goods_weight

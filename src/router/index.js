@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '@/components/Login'
-import Home from '@/components/Home'
-import Welcome from '@/components/Home/Welcome'
-import Users from '@/components/users/Users'
-import Rights from '@/components/power/Rights'
-import Roles from '@/components/power/Roles'
-import Categories from '@/components/goods/Categories'
-import Params from '@/components/goods/Params'
-import List from '@/components/goods/List'
-import AddGoods from '@/components/goods/AddGoods'
-import Order from '@/components/order/Order'
-import Report from '@/components/report/Report'
+// 路由懒加载
+const Login = () => import('@/components/Login')
+const Home = () => import('@/components/Home')
+const Welcome = () => import('@/components/Home/Welcome')
+const Users = () => import('@/components/users/Users')
+const Rights = () => import('@/components/power/Rights')
+const Roles = () => import('@/components/power/Roles')
+const Categories = () => import('@/components/goods/Categories')
+const Params = () => import('@/components/goods/Params')
+const List = () => import('@/components/goods/List')
+const AddGoods = () => import('@/components/goods/AddGoods')
+const Order = () => import('@/components/order/Order')
+const Report = () => import('@/components/report/Report')
 Vue.use(VueRouter)
 const routes = [
   {
